@@ -15,11 +15,9 @@
                 return this.firstName + ' ' + this.lastName;
             }
         });
-        var renderCount = 0;
         var $destination = $('h1');
         mobx.autorun(function() {
-          renderCount += 1;
-          $destination.text(person.fullName + ' render count: ' + renderCount);
+          $destination.text(person.fullName);
         });
 
         $('#firstNameInput').on('keyup', function() {
