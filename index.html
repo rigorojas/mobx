@@ -1,0 +1,34 @@
+<html>
+    <head></head>
+    <body>
+        <input id='firstNameInput' type='text' name='firstName' value='' placeholder='first name'/>
+        <input id='lastNameInput' type='text' name='lastName' value='' placeholder='last name'/>
+        <h1>Test</h1>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/mobx@2.5.1/lib/mobx.umd.min.js"></script>
+        <script type="text/javascript">
+        var person = mobx.observable({
+            firstName: 'Matt',
+            lastName: 'Ruby',
+            age: 37,
+            fullName: function(){
+                return this.firstName + ' ' + this.lastName;
+            }
+        });
+        var renderCount = 0;
+        var $destination = $('h1');
+        mobx.autorun(function() {
+          renderCount += 1;
+          $destination.text(person.fullName + ' render count: ' + renderCount);
+        });
+
+        $('#firstNameInput').on('keyup', function() {
+          person.firstName = $(this).val();
+        });
+
+        $('#lastNameInput').on('keyup', function() {
+          person.lastName = $(this).val();
+        });
+        </script>
+    </body>
+</html>
